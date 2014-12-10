@@ -23,11 +23,17 @@ class TestCase(unittest.TestCase):
     def test_avatar(self):
         u = User(nickname='john', email='john@example.com')
         avatar = u.avatar(128)
-        expected = 'http://wwww.gravatar.com/avatar/d4c74594d841139328695756648b6bd6'
+        expected = 'http://www.gravatar.com/avatar/d4c74594d841139328695756648b6bd6'
         assert avatar[0:len(expected)] == expected
 
     def test_make_unique_nick(self):
         u = User(nickname='john', email='john.example.com')
+        db.session.add(u)
+        db.session.commit()
+        nickname = User.make_unique_nickname('john')
+        assert nickname != 'john'
+
+        u = User(nickname=nickname, email='another@example.com')
         db.session.add(u)
         db.session.commit()
         nickname2 = User.make_unique_nickname('john')
