@@ -19,4 +19,4 @@ MAIL_PORT = 25
 MAIL_USERNAME = None
 MAIL_PASSWORD = None
 
-ADMINS = ['rohara@gmail.com']
+ADMINS = ['risaohara@gmail.com']
